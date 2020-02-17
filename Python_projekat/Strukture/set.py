@@ -1,3 +1,6 @@
+import time
+
+
 class Set:
     def __init__(self):
         self.data = {}
@@ -16,10 +19,12 @@ class Set:
         i = 2
         for value in self.data.keys():
             i = 0
-            string = string + value + ','
-        return string[:-1+i] + '}'
+            string = string + str(value) + ','
+        return string[:-1 + i] + '}'
 
     def __or__(self, other):
+        if not isinstance(other, Set):
+            return NotImplemented
         if len(self) <= len(other):
             smaller = self
             result = other
@@ -31,6 +36,8 @@ class Set:
         return result
 
     def __and__(self, other):
+        if not isinstance(other, Set):
+            return NotImplemented
         result = Set()
         if len(self) <= len(other):
             smaller = self
@@ -64,27 +71,3 @@ class Set:
         except KeyError:
             print("Ne postoji dati element")
 
-
-
-
-
-
-set1 = Set()
-set2 = Set()
-set1.add("10")
-set1.add("20")
-set1.add("30")
-set1.add("52")
-set1.add("40")
-set1.add("80")
-
-set2.add("100")
-set2.add("30")
-set2.add("80")
-set2.add("40")
-set2.add("60")
-
-set3 = set1 - set2
-print(set1)
-print(set2)
-print(set3)
