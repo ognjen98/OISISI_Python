@@ -1,9 +1,9 @@
-
+from Strukture.set import *
 
 class TrieNode:
     def __init__(self, slovo = None):
         self.slovo = slovo
-        self.fajlovi = {}
+        self.fajlovi = Set()
         self.deca = {}
 
     def __getitem__(self, slovo):
@@ -43,9 +43,8 @@ class Trie:
                 i += 1
 
         if fajl not in cvor.fajlovi:
-            cvor.fajlovi[fajl] = 1 # Ako se fajl ne nalazi u recniku fajlova postavlja broj reci u njemu na 1, u suprotnom uvecava za 1
-        else:
-            cvor.fajlovi[fajl] += 1
+            cvor.fajlovi.add(fajl)
+
 
     def pronadjiRec(self, rec):
         """
@@ -61,3 +60,13 @@ class Trie:
                 return None
 
         return cvor.fajlovi
+
+
+
+    def traziSaNot(self, rec, skup):
+        skup2 = self.find(rec)
+        fajlovi = skup - skup2
+
+        return list(fajlovi)
+
+
