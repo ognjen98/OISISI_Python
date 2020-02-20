@@ -69,4 +69,22 @@ class Trie:
 
         return list(fajlovi)
 
+    def traziSaAnd(self, rec1, rec2):
+        fajl1 = self.find(rec1)
+        fajl2 = self.find(rec2)
+
+        fajlovi = fajl1 & fajl2
+
+
+        return list(fajlovi), fajl1, fajl2
+
+    def traziSaOr(self, rec1, rec2):
+        fajl1 = self.find(rec1)
+        fajl2 = self.find(rec2)
+
+        fajlovi = fajl1 | fajl2
+
+
+        return list(fajlovi), fajl1, fajl2
+
 
