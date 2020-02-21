@@ -106,14 +106,10 @@ vertex3 = Vertex("c")
 graph.insert_vertex(vertex3)
 graph.insert_edges(vertex1, vertex2, "ab")
 graph.insert_edges(vertex1, vertex3, "ac")
-
-outgoing = {}
-outgoing['b'] = {}
-outgoing['b']['a'] = "gdgdksgkdsl"
 for value in graph.incoming.values():
     for value1 in value.values():
         print(value1)
 list = graph.incident_edges(vertex2)
 for value in list:
     print(value)
-print(graph.degree(vertex2))
+print(graph.degree(vertex2, False))
