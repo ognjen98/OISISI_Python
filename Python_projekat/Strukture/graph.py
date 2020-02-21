@@ -69,12 +69,14 @@ class Graph:
     def get_edge(self, o, d):
         return self.outgoing[o].get(d)
 
-    def degree(self, v):
-        return len(self.incoming[v])
+    def degree(self, v, outgoing = True):
+        adj = self.outgoing if outgoing else self.incoming
+        return len(adj[v])
 
-    def incident_edges(self, v):
+    def incident_edges(self, v, outgoing = True):
         list = []
-        for edge in self.incoming[v].values():
+        adj = self.outgoing if outgoing else self.incoming
+        for edge in adj:
             list.append(edge)
         return list
 
