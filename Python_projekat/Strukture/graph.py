@@ -76,7 +76,7 @@ class Graph:
     def incident_edges(self, v, outgoing = True):
         list = []
         adj = self.outgoing if outgoing else self.incoming
-        for edge in adj:
+        for edge in adj[v].values:
             list.append(edge)
         return list
 
@@ -93,23 +93,20 @@ class Graph:
     def __str__(self):
         res = 'Cvorovi: '
         for el in self.outgoing.keys():
-            res += str(el)
+            res += str(el) + ","
         return res
 
 
+
+vertex1 = Vertex("a")
+vertex2 = Vertex("b")
+
 graph = Graph()
-vertex1 = Vertex('a')
-vertex2 = Vertex('b')
 graph.insert_vertex(vertex1)
 graph.insert_vertex(vertex2)
-vertex3 = Vertex("c")
-graph.insert_vertex(vertex3)
-graph.insert_edges(vertex1, vertex2, "ab")
-graph.insert_edges(vertex1, vertex3, "ac")
-for value in graph.incoming.values():
-    for value1 in value.values():
-        print(value1)
-list = graph.incident_edges(vertex2)
-for value in list:
-    print(value)
-print(graph.degree(vertex2, False))
+graph.insert_edges(vertex1,vertex2)
+for value in graph.outgoing.values():
+    for val in value.keys():
+        print(val)
+print(graph)
+print(graph.degree(vertex2))
