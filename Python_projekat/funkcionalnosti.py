@@ -91,23 +91,3 @@ def ranking(documents, dict1, dict2=None):
 
     return result
 
-
-
-
-
-directory = str(input("Unesi korenski direktorijum"))
-start_time = time.time()
-load(directory)
-print("vreme: " + str(time.time() - start_time))
-rec1 = str(input("Unesi rec 1"))
-#rec2 = str(input("Unesi rec 2"))
-start_time = time.time()
-skup, dict1 = trie.pronadjiRec(rec1)
-print("Vreme pretrage: " + str(time.time() - start_time))
-list = ranking(skup, dict1)
-
-for value in list:
-    print(value)
-
-print(len(graph.vertices))
-print(len(graph.edges))
