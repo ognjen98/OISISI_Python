@@ -1,115 +1,76 @@
-from OISISI_Python.Python_projekat.Strukture.set import *
-
 
 class Vertex:
-
     def __init__(self, x):
         self.element = x
-
-    def __key(self):
-        return (self.element)
 
     def get_element(self):
         return self.element
 
-    def __eq__(self, other):
-        return self.element == other.element
-
-    def __hash__(self):
-        return hash(id(self))
-
     def __str__(self):
         return str(self.element)
 
+    def __eq__(self, other):
+        return self.element == other.element
+
 
 class Edge:
-    def __init__(self, o, d, x):
+    def __init__(self, o, d, x=None):
         self.origin = o
         self.destination = d
         self.element = x
 
-    def endspoint(self):
-        return (self.origin, self.destination)
-
-    def oposite(self, v):
-        return self.destination if v is self.origin else self.origin
-
-    def element(self):
-        return self.element
-
-    def __hash__(self):
-        return hash((self.origin, self.destination))
+    def __eq__(self, other):
+        return self.origin == other.origin and self.destination == other.destination
 
     def __str__(self):
-        result = "Izvorni cvor: " + str(self.origin) + " Odredisni cvor: " + str(self.destination) + " Grana: " + str(
-            self.element)
+        result = 'Izvor: ' + str(self.origin) + ' Odrediste: ' + str(self.destination)
         return result
 
 
 class Graph:
     def __init__(self):
-        self.outgoing = {}
-        self.incoming = {}
+        self.vertices = []
+        self.edges = []
+
+    def get_vertices(self):
+        return self.vertices
+
+    def get_edges(self):
+        return self.edges
+
+    def edge_count(self):
+        return len(self.edges)
 
     def vertex_count(self):
-        return len(self.outgoing)
+        return len(self.vertices)
 
-    def vertices(self):
-        return self.outgoing.keys()
-
-    def edge_count(self, v):
-        return sum(len(self.outgoing[v]) for v in self.outgoing)
-
-    def edges(self):
-        result = Set()
-        for secondary_map in self.outgoing.values():
-            result.add(secondary_map.values())
-        return result
-
-    def get_edge(self, o, d):
-        return self.outgoing[o].get(d)
-
-    def degree(self, v, outgoing = True):
-        adj = self.outgoing if outgoing else self.incoming
-        return len(adj[v])
-
-    def incident_edges(self, v, outgoing = True):
-        list = []
-        adj = self.outgoing if outgoing else self.incoming
-        for edge in adj:
-            list.append(edge)
-        return list
-
-    def insert_vertex(self, v=None):
-        self.outgoing[v] = {}
-        self.incoming[v] = {}
+    def insert_vertex(self, x=None):
+        v = Vertex(x)
+        if v not in self.vertices:
+            self.vertices.append(v)
         return v
 
-    def insert_edges(self, o, d, x=None):
+    def insert_edge(self, o, d, x=None):
         e = Edge(o, d, x)
-        self.outgoing[o][d] = e
-        self.incoming[d][o] = e
+        self.edges.append(e)
 
-    def __str__(self):
-        res = 'Cvorovi: '
-        for el in self.outgoing.keys():
-            res += str(el)
-        return res
+    def incident_edges(self, v, out=True):
+        edges_list = []
+        if out:
+            for edge in self.edges:
+                if edge.origin == v:
+                    edges_list.append(edge)
+        else:
+            for edge in self.edges:
+                if edge.destination == v:
+                    edges_list.append(edge)
+        return edges_list
 
+    def degree(self, v, out=True):
+        return len(self.incident_edges(v, out))
 
-graph = Graph()
-vertex1 = Vertex('a')
-vertex2 = Vertex('b')
-graph.insert_vertex(vertex1)
-graph.insert_vertex(vertex2)
-vertex3 = Vertex("c")
-graph.insert_vertex(vertex3)
-graph.insert_edges(vertex1, vertex2, "ab")
-graph.insert_edges(vertex1, vertex3, "ac")
-for value in graph.incoming.values():
-    for value1 in value.values():
-        print(value1)
-list = graph.incident_edges(vertex2)
-for value in list:
-    print(value)
-print(graph.degree(vertex2, False))
+    def get_vertex(self, x=None):
+        for i in range(0, len(self.vertices)):
+            if x == str(self.vertices[i]):
+                return self.vertices[i]
+        return None
