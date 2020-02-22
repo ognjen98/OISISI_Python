@@ -80,7 +80,7 @@ def ranking(documents, dict1, dict2=None):
                 word1 = 0
             else:
                 word1 = dict1[doc]
-            if doc not in dict2.keys():
+            if dict2 is None or doc not in dict2.keys():
                 word2 = 0
             else:
                 word2 = dict2[doc]
@@ -100,11 +100,11 @@ start_time = time.time()
 load(directory)
 print("vreme: " + str(time.time() - start_time))
 rec1 = str(input("Unesi rec 1"))
-rec2 = str(input("Unesi rec 2"))
+#rec2 = str(input("Unesi rec 2"))
 start_time = time.time()
-skup, dict1, dict2 = traziSaAnd(rec1, rec2)
+skup, dict1 = trie.pronadjiRec(rec1)
 print("Vreme pretrage: " + str(time.time() - start_time))
-list = ranking(skup, dict1, dict2)
+list = ranking(skup, dict1)
 
 for value in list:
     print(value)
