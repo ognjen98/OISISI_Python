@@ -12,6 +12,7 @@ class Vertex:
     def __eq__(self, other):
         return self.element == other.element
 
+
 class Edge:
     def __init__(self, o, d, x=None):
         self.origin = o
@@ -21,7 +22,8 @@ class Edge:
     def __str__(self):
         result = 'Izvor: ' + str(self.origin) + ' Odrediste: ' + str(self.destination)
         return result
-    
+
+
 class Graph:
     def __init__(self):
         self.vertices = []
@@ -49,3 +51,17 @@ class Graph:
         e = Edge(o, d, x)
         self.edges.append(e)
 
+    def incident_edges(self, v, out=True):
+        edges_list = []
+        if out:
+            for edge in self.edges:
+                if edge.origin == v:
+                    list.append(edge)
+        else:
+            for edge in self.edges:
+                if edge.destination == v:
+                    list.append(edge)
+        return edges_list
+
+    def degree(self, v, out=True):
+        return len(self.incident_edges(v, out))
