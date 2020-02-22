@@ -19,6 +19,9 @@ class Edge:
         self.destination = d
         self.element = x
 
+    def __eq__(self, other):
+        return self.origin == other.origin and self.destination == other.destination
+
     def __str__(self):
         result = 'Izvor: ' + str(self.origin) + ' Odrediste: ' + str(self.destination)
         return result
@@ -65,3 +68,9 @@ class Graph:
 
     def degree(self, v, out=True):
         return len(self.incident_edges(v, out))
+
+    def get_vertex(self, x=None):
+        for i in range(0, len(self.vertices)):
+            if x == str(self.vertices[i]):
+                return self.vertices[i]
+        return None
