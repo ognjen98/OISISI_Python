@@ -21,17 +21,20 @@ def traziSaNot(rec):
 def traziSaAnd(rec1, rec2):
     fajl1, dict1 = trie.pronadjiRec(rec1)
     fajl2, dict2 = trie.pronadjiRec(rec2)
-
-    fajlovi = fajl1 & fajl2
-
+    try:
+        fajlovi = fajl1 & fajl2
+    except:
+        print("Nije pronadjen nijedan rezultat")
     return fajlovi, dict1, dict2
 
 
 def traziSaOr(rec1, rec2):
     fajl1, dict1 = trie.pronadjiRec(rec1)
     fajl2, dict2 = trie.pronadjiRec(rec2)
-
-    fajlovi = fajl1 | fajl2
+    try:
+        fajlovi = fajl1 | fajl2
+    except:
+        print("Nije pronadjen nijedan rezultat")
 
     return fajlovi,dict1,dict2
 
