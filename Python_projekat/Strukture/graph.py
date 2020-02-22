@@ -8,6 +8,9 @@ class Vertex:
     def __str__(self):
         return str(self.element)
 
+    def __eq__(self, other):
+        return self.element == other.element
+
 class Edge:
     def __init__(self, o, d, x=None):
         self.origin = o
@@ -17,9 +20,7 @@ class Edge:
     def __str__(self):
         result = 'Izvor: ' + str(self.origin) + ' Odrediste: ' + str(self.destination)
         return result
-
-
-
+    
 class Graph:
     def __init__(self):
         self.vertices = []
@@ -39,9 +40,11 @@ class Graph:
 
     def insert_vertex(self, x=None):
         v = Vertex(x)
-        self.vertices.append(v)
+        if v not in self.vertices:
+            self.vertices.append(v)
         return v
 
     def insert_edge(self, o, d, x=None):
         e = Edge(o, d, x)
         self.edges.append(e)
+
