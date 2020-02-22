@@ -3,7 +3,8 @@ from OISISI_Python.Python_projekat.Strukture.set import *
 class TrieNode:
     def __init__(self, slovo = None):
         self.slovo = slovo
-        self.fajlovi = Set()
+        self.fajlovi = {}
+        self.skupFajlova = Set()
         self.deca = {}
 
     def __getitem__(self, slovo):
@@ -43,7 +44,13 @@ class Trie:
                 i += 1
 
         if fajl not in cvor.fajlovi:
-            cvor.fajlovi.add(fajl)
+            cvor.fajlovi[fajl] = 1
+        else:
+            cvor.fajlovi[fajl] += 1
+
+
+        for f in cvor.fajlovi:
+            cvor.skupFajlova.add(f)
 
 
     def pronadjiRec(self, rec):
@@ -59,7 +66,7 @@ class Trie:
             else:
                 return None
 
-        return cvor.fajlovi
+        return cvor.skupFajlova
 
 
 
