@@ -59,11 +59,11 @@ class Graph:
         if out:
             for edge in self.edges:
                 if edge.origin == v:
-                    list.append(edge)
+                    edges_list.append(edge)
         else:
             for edge in self.edges:
                 if edge.destination == v:
-                    list.append(edge)
+                    edges_list.append(edge)
         return edges_list
 
     def degree(self, v, out=True):
