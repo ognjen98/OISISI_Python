@@ -1,6 +1,7 @@
 from OISISI_Python.Python_projekat.parser import *
 from OISISI_Python.Python_projekat.Strukture.graph import *
 from OISISI_Python.Python_projekat.Strukture.set import *
+from OISISI_Python.Python_projekat.Strukture.trie import *
 import os
 import time
 
@@ -8,6 +9,31 @@ parser = Parser()
 
 graph = Graph()
 skup = Set()
+trie = Trie()
+
+def traziSaNot(rec):
+    skup2, dict = trie.pronadjiRec(rec)
+    fajlovi = skup - skup2
+
+    return fajlovi
+
+
+def traziSaAnd(rec1, rec2):
+    fajl1, dict1 = trie.pronadjiRec(rec1)
+    fajl2, dict2 = trie.pronadjiRec(rec2)
+
+    fajlovi = fajl1 & fajl2
+
+    return fajlovi, dict1, dict2
+
+
+def traziSaOr(rec1, rec2):
+    fajl1, dict1 = trie.pronadjiRec(rec1)
+    fajl2, dict2 = trie.pronadjiRec(rec2)
+
+    fajlovi = fajl1 | fajl2
+
+    return fajlovi,dict1,dict2
 
 
 def load(directory):

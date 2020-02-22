@@ -68,31 +68,3 @@ class Trie:
                 return None
 
         return cvor.skupFajlova,cvor.fajlovi
-
-
-
-    def traziSaNot(self, rec, skup):
-        skup2,dict = self.pronadjiRec(rec)
-        fajlovi = skup - skup2
-
-        return list(fajlovi)
-
-    def traziSaAnd(self, rec1, rec2):
-        fajl1,dict1 = self.pronadjiRec(rec1)
-        fajl2,dict2 = self.pronadjiRec(rec2)
-
-        fajlovi = fajl1 & fajl2
-
-
-        return list(fajlovi), fajl1, fajl2
-
-    def traziSaOr(self, rec1, rec2):
-        fajl1,dict1 = self.pronadjiRec(rec1)
-        fajl2,dict2 = self.pronadjiRec(rec2)
-
-        fajlovi = fajl1 | fajl2
-
-
-        return list(fajlovi), fajl1, fajl2
-
-
