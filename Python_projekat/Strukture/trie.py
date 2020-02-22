@@ -50,7 +50,8 @@ class Trie:
 
 
         for f in cvor.fajlovi:
-            cvor.skupFajlova.add(f)
+            if f not in cvor.skupFajlova:
+                cvor.skupFajlova.add(f)
 
 
     def pronadjiRec(self, rec):
@@ -66,19 +67,19 @@ class Trie:
             else:
                 return None
 
-        return cvor.skupFajlova
+        return cvor.skupFajlova,cvor.fajlovi
 
 
 
     def traziSaNot(self, rec, skup):
-        skup2 = self.find(rec)
+        skup2,dict = self.find(rec)
         fajlovi = skup - skup2
 
         return list(fajlovi)
 
     def traziSaAnd(self, rec1, rec2):
-        fajl1 = self.find(rec1)
-        fajl2 = self.find(rec2)
+        fajl1,dict1 = self.find(rec1)
+        fajl2,dict2 = self.find(rec2)
 
         fajlovi = fajl1 & fajl2
 
@@ -86,8 +87,8 @@ class Trie:
         return list(fajlovi), fajl1, fajl2
 
     def traziSaOr(self, rec1, rec2):
-        fajl1 = self.find(rec1)
-        fajl2 = self.find(rec2)
+        fajl1,dict1 = self.find(rec1)
+        fajl2,dict2 = self.find(rec2)
 
         fajlovi = fajl1 | fajl2
 
