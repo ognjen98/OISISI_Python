@@ -45,6 +45,9 @@ def load(directory):
                 skup.add(os.path.join(directory, file))
                 list = parser.parse(os.path.join(directory, file))
                 links = list[0]
+                words = list[1]
+                for word in words:
+                    trie.dodajRec(word, os.path.join(directory, file))
                 cvor1 = graph.insert_vertex(os.path.join(directory, file))
                 for link in links:
                     cvor2 = graph.insert_vertex(link)
@@ -98,6 +101,13 @@ directory = str(input("Unesi korenski direktorijum"))
 start_time = time.time()
 load(directory)
 print("vreme: " + str(time.time() - start_time))
-
+rec1 = str(input("Unesi rec 1"))
+rec2 = str(input("Unesi rec 2"))
+skup, dict1, dict2 = traziSaAnd(rec1, rec2)
+list = ranking(skup, dict1, dict2)
+print(skup)
+print(len(skup))
+print(dict1)
+print(dict2)
 print(len(graph.vertices))
 print(len(graph.edges))
