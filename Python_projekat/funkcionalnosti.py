@@ -65,9 +65,7 @@ def load(directory):
 
 def ranking(documents, dict1, dict2=None):
     result = []
-    pom = []
     for document in documents:
-
         vertex = graph.get_vertex(document)
         links_number = graph.degree(vertex, False)
         links = links_number * 0.8
@@ -75,7 +73,7 @@ def ranking(documents, dict1, dict2=None):
             words_doc1 = 0
         else:
             words_doc1 = dict1[document]
-        if  dict2 is None or document not in dict2.keys():
+        if dict2 is None or document not in dict2.keys():
             words_doc2 = 0
         else:
             words_doc2 = dict2[document]
@@ -83,40 +81,26 @@ def ranking(documents, dict1, dict2=None):
         words_in_links = 0
         edges = graph.incident_edges(vertex, False)
         for edge in edges:
-            doc = edge.origin.get_element
+            doc = str(edge.origin)
             if doc not in dict1.keys():
                 word1 = 0
             else:
                 word1 = dict1[doc]
-            if doc not in dict1.keys():
+            if dict2 is None or doc not in dict2.keys():
                 word2 = 0
             else:
                 word2 = dict2[doc]
             words_in_links += word1 + word2
         words_in_links = words_in_links * 1.4
-        pom.append(str(document))
-        pom.append(words + links + words_in_links)
-        print(pom)
-        result.append(pom)
-        pom.pop(1)
-        pom.pop(0)
+        tupple = (str(document), words + links + words_in_links)
+        result.append(tupple)
+
     return result
 
+def prikaz(list):
+    string = "Putanje do doukmenata" + " "*100 + "Rang"
+    print(string)
+    for value in list:
+        print(value[0] + " "*(len(string)-len(value[0])-4) +  str(round(value[1], 2)))
 
 
-
-
-directory = str(input("Unesi korenski direktorijum"))
-start_time = time.time()
-load(directory)
-print("vreme: " + str(time.time() - start_time))
-rec1 = str(input("Unesi rec 1"))
-rec2 = str(input("Unesi rec 2"))
-skup, dict1, dict2 = traziSaAnd(rec1, rec2)
-list = ranking(skup, dict1, dict2)
-print(skup)
-print(len(skup))
-print(dict1)
-print(dict2)
-print(len(graph.vertices))
-print(len(graph.edges))
