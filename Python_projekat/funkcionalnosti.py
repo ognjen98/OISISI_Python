@@ -1,12 +1,13 @@
-from parser import *
+
+from Strukture.trie import *
 from Strukture.graph import *
 from Strukture.set import *
-from Strukture.trie import *
+
 import os
 import time
+from parser import *
 
 parser = Parser()
-
 graph = Graph()
 skup = Set()
 trie = Trie()
