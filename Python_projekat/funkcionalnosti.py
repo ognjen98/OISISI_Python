@@ -1,7 +1,7 @@
-from OISISI_Python.Python_projekat.parser import *
-from OISISI_Python.Python_projekat.Strukture.graph import *
-from OISISI_Python.Python_projekat.Strukture.set import *
-from OISISI_Python.Python_projekat.Strukture.trie import *
+from parser import *
+from Strukture.graph import *
+from Strukture.set import *
+from Strukture.trie import *
 import os
 import time
 
@@ -12,7 +12,11 @@ skup = Set()
 trie = Trie()
 
 def traziSaNot(rec):
-    skup2, dict = trie.pronadjiRec(rec)
+    try:
+        skup2, dict = trie.pronadjiRec(rec)
+    except AttributeError:
+        print("Nije pronadjen nijedan rezultat")
+        return
     fajlovi = skup - skup2
 
     return fajlovi
@@ -23,8 +27,9 @@ def traziSaAnd(rec1, rec2):
     fajl2, dict2 = trie.pronadjiRec(rec2)
     try:
         fajlovi = fajl1 & fajl2
-    except:
+    except AttributeError:
         print("Nije pronadjen nijedan rezultat")
+        return
     return fajlovi, dict1, dict2
 
 
@@ -33,8 +38,9 @@ def traziSaOr(rec1, rec2):
     fajl2, dict2 = trie.pronadjiRec(rec2)
     try:
         fajlovi = fajl1 | fajl2
-    except:
+    except AttributeError:
         print("Nije pronadjen nijedan rezultat")
+        return
 
     return fajlovi,dict1,dict2
 

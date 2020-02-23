@@ -1,4 +1,4 @@
-from OISISI_Python.Python_projekat.Strukture.set import *
+from Strukture.set import *
 
 class TrieNode:
     def __init__(self, slovo = None):
