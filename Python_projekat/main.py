@@ -16,6 +16,9 @@ if __name__ == '__main__':
             #Proga:
             start_time = time.time()
             skup, dict1 = trie.pronadjiRec(upit)
+            if skup == None or dict1 == None:
+                print("Nije pronadjena zadata rec\n")
+                continue
             print("Vreme pretrage: " + str(time.time() - start_time))
             list = ranking(skup, dict1)
             print("Broj rezultata pretrage: " + str(len(list)))
