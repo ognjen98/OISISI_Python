@@ -5,9 +5,13 @@ from Strukture.set import *
 
 import os
 import time
-from parser import *
+from pars import Parser
 
 parser = Parser()
+
+
+
+
 graph = Graph()
 skup = Set()
 trie = Trie()
@@ -26,6 +30,7 @@ def traziSaNot(rec):
 def traziSaAnd(rec1, rec2):
     fajl1, dict1 = trie.pronadjiRec(rec1)
     fajl2, dict2 = trie.pronadjiRec(rec2)
+    print("Kurac")
     try:
         fajlovi = fajl1 & fajl2
     except AttributeError:

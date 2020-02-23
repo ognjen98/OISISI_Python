@@ -2,7 +2,7 @@ from funkcionalnosti import *
 
 if __name__ == '__main__':
     directory = str(input("Unesite korenski direktorijum: "))
-    #load(directory)
+    load(directory)
 
     while True:
         print("1 -> Pretraga")
