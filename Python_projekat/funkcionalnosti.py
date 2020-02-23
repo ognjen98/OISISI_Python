@@ -1,4 +1,3 @@
-
 from Strukture.trie import *
 from Strukture.graph import *
 from Strukture.set import *
@@ -17,16 +16,21 @@ trie = Trie()
 def traziSaOr(reci):
     skup = Set()
     lista = []
+    i = 0
     try:
         for rec in reci:
-            file,recnik = trie.pronadjiRec(rec)
-            skup = skup | file
+            file, recnik = trie.pronadjiRec(rec)
+            if file is not None:
+                skup = skup | file
+                i = 1
+
             lista.append(recnik)
     except AttributeError:
         print("Nije pronadjen nijedan rezultat")
         return
 
-    return skup,lista
+    return skup, lista, i
+
 
 def traziSaNot(rec):
     try:
@@ -53,7 +57,6 @@ def traziSaAnd(rec1, rec2):
     return fajlovi, lista
 
 
-
 def load(directory):
     for file in os.listdir(directory):
         if os.path.isdir(os.path.join(directory, file)):
@@ -72,44 +75,44 @@ def load(directory):
                     graph.insert_edge(cvor1, cvor2)
 
 
-def ranking(documents, dict1, dict2=None):
-    result = []
-    for document in documents:
-        vertex = graph.get_vertex(document)
-        links_number = graph.degree(vertex, False)
-        links = links_number * 0.8
-        if document not in dict1.keys():
-            words_doc1 = 0
-        else:
-            words_doc1 = dict1[document]
-        if dict2 is None or document not in dict2.keys():
-            words_doc2 = 0
-        else:
-            words_doc2 = dict2[document]
-        words = words_doc1 * 0.2 + words_doc2 * 0.2
-        words_in_links = 0
-        edges = graph.incident_edges(vertex, False)
-        for edge in edges:
-            doc = str(edge.origin)
-            if doc not in dict1.keys():
-                word1 = 0
-            else:
-                word1 = dict1[doc]
-            if dict2 is None or doc not in dict2.keys():
-                word2 = 0
-            else:
-                word2 = dict2[doc]
-            words_in_links += word1 + word2
-        words_in_links = words_in_links * 1.4
-        tupple = (str(document), words + links + words_in_links)
-        result.append(tupple)
+def ranking(document, dict1):
+    if document is None or dict1 is None:
+        return 0
+    result = 0
+    vertex = graph.get_vertex(document)
+    links_number = graph.degree(vertex, False)
+    if document not in dict1.keys():
+        words_number = 0
+    else:
+        words_number = dict1[document]
+    words = words_number * 0.2
+    words_in_links = 0
+    edges = graph.incident_edges(vertex, False)
+    for edge in edges:
+        doc = str(edge.origin)
+        if doc in dict1.keys():
+            words_in_links += dict1[doc]
+            links_number = links_number - 1
 
+    links = links_number * 0.8
+    link_words = words_in_links * 1.2
+    result = words + link_words + links
     return result
 
+
+def rangiraj(documents, words):
+    list = []
+    for document in documents:
+        rank = 0
+        for word in words:
+            rank += ranking(document, word)
+        tupple = (str(document), rank)
+        list.append(tupple)
+    return list
+
+
 def prikaz(list):
-    string = "Putanje do doukmenata" + " "*100 + "Rang"
+    string = "Putanje do doukmenata" + " " * 100 + "Rang"
     print(string)
     for value in list:
-        print(value[0] + " "*(len(string)-len(value[0])-4) +  str(round(value[1], 2)))
-
-
+        print(value[0] + " " * (len(string) - len(value[0]) - 4) + str(round(value[1], 2)))

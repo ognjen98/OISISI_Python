@@ -17,16 +17,17 @@ if __name__ == '__main__':
             #Ovde ide kod za parsiranje pozivanje odgovarajuce funkcije za pretragu
             #Proga:
             start_time = time.time()
-            skup, dict1 = trie.pronadjiRec(upit)
-            if skup == None or dict1 == None:
-                print("Nema rezultata pretrage\n")
-                continue
+            list = []
+            list.append(upit)
+            skup, dict1, i = traziSaOr(list)
+            if i == 0:
+                print("Nema rezultata pretrage")
             print("Vreme pretrage: " + str(time.time() - start_time))
-            list = ranking(skup, dict1)
+            list = rangiraj(skup, dict1)
             merge_sort(list)
             print("Broj rezultata pretrage: " + str(len(list)))
 
-            prikaz(list) #treba pozvati metodu za sortiranje pre prikaza
+            prikaz(list)
 
 
         elif option == 0:
