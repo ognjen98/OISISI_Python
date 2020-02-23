@@ -1,8 +1,10 @@
 from funkcionalnosti import *
-
+from sort import *
 if __name__ == '__main__':
     directory = str(input("Unesite korenski direktorijum: "))
+    start_time = time.time()
     load(directory)
+    print("Vreme ucitavanja: " + str(time.time() - start_time))
 
     while True:
         print("1 -> Pretraga")
@@ -21,6 +23,7 @@ if __name__ == '__main__':
                 continue
             print("Vreme pretrage: " + str(time.time() - start_time))
             list = ranking(skup, dict1)
+            merge_sort(list)
             print("Broj rezultata pretrage: " + str(len(list)))
 
             prikaz(list) #treba pozvati metodu za sortiranje pre prikaza
