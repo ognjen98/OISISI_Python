@@ -10,7 +10,13 @@ if __name__ == '__main__':
         print("1 -> Pretraga")
         print("2")
         print("0 -> Izlazak iz programa")
-        option = int(input("IZABERITE OPCIJU"))
+        try:
+            option = int(input("IZABERITE OPCIJU"))
+            if option not in (0, 1):
+                raise Exception
+        except:
+            print("Nevalidna opcija")
+            continue
 
         if option == 1:
             upit = str(input("Unesite upit"))
