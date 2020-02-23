@@ -65,6 +65,9 @@ class Set:
         except TypeError:
             raise
 
+    def is_empty(self):
+        return True if len(self.data) == 0 else  False
+
     def remove(self, item):
         try:
             del self.data[item]
