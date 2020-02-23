@@ -19,7 +19,7 @@ if __name__ == '__main__':
             start_time = time.time()
             skup, dict1 = trie.pronadjiRec(upit)
             if skup == None or dict1 == None:
-                print("Nije pronadjena zadata rec\n")
+                print("Nema rezultata pretrage\n")
                 continue
             print("Vreme pretrage: " + str(time.time() - start_time))
             list = ranking(skup, dict1)
@@ -29,5 +29,5 @@ if __name__ == '__main__':
             prikaz(list) #treba pozvati metodu za sortiranje pre prikaza
 
 
-        if option == 0:
+        elif option == 0:
             break
