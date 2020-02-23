@@ -91,3 +91,10 @@ def ranking(documents, dict1, dict2=None):
 
     return result
 
+def prikaz(list):
+    string = "Putanje do doukmenata" + " "*100 + "Rang"
+    print(string)
+    for value in list:
+        print(value[0] + " "*(len(string)-len(value[0])-4) +  str(round(value[1], 2)))
+
+

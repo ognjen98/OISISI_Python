@@ -3,6 +3,12 @@ from OISISI_Python.Python_projekat.funkcionalnosti import *
 if __name__ == '__main__':
     directory = str(input("Unesite korenski direktorijum: "))
     load(directory)
+    print("Broj dokumenat za pretragu: " + str(len(graph.vertices)))
+    string = "D:\Fakultet1\Survival3\Semestar1\OISISI\prj2-test\python-2.7.7-docs-html\\bugs.html"
+    vertex = graph.get_vertex(string)
+    print(vertex)
+    print(graph.degree(vertex, False))
+    print(len(graph.incident_edges(vertex, False)))
 
     while True:
         print("1 -> Pretraga")
@@ -19,8 +25,9 @@ if __name__ == '__main__':
             print("Vreme pretrage: " + str(time.time() - start_time))
             list = ranking(skup, dict1)
             print("Broj rezultata pretrage: " + str(len(list)))
-            for value in list:
-                print(value)
+
+            prikaz(list) #treba pozvati metodu za sortiranje pre prikaza
+
 
         if option == 0:
             break
