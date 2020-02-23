@@ -9,12 +9,24 @@ from pars import Parser
 
 parser = Parser()
 
-
-
-
 graph = Graph()
 skup = Set()
 trie = Trie()
+
+
+def traziSaOr(reci):
+    skup = Set()
+    lista = []
+    try:
+        for rec in reci:
+            file,recnik = trie.pronadjiRec(rec)
+            skup = skup | file
+            lista.append(recnik)
+    except AttributeError:
+        print("Nije pronadjen nijedan rezultat")
+        return
+
+    return skup,lista
 
 def traziSaNot(rec):
     try:
@@ -28,27 +40,18 @@ def traziSaNot(rec):
 
 
 def traziSaAnd(rec1, rec2):
+    lista = []
     fajl1, dict1 = trie.pronadjiRec(rec1)
     fajl2, dict2 = trie.pronadjiRec(rec2)
-    print("Kurac")
+    lista.append(dict1)
+    lista.append(dict2)
     try:
         fajlovi = fajl1 & fajl2
     except AttributeError:
         print("Nije pronadjen nijedan rezultat")
         return
-    return fajlovi, dict1, dict2
+    return fajlovi, lista
 
-
-def traziSaOr(rec1, rec2):
-    fajl1, dict1 = trie.pronadjiRec(rec1)
-    fajl2, dict2 = trie.pronadjiRec(rec2)
-    try:
-        fajlovi = fajl1 | fajl2
-    except AttributeError:
-        print("Nije pronadjen nijedan rezultat")
-        return
-
-    return fajlovi,dict1,dict2
 
 
 def load(directory):

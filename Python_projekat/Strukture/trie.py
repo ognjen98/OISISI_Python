@@ -11,7 +11,7 @@ class TrieNode:
         return self.deca[slovo]
 
     def dodajCvorDete(self,slovo):
-        self.deca[slovo] = TrieNode(slovo)
+        self.deca[slovo.lower()] = TrieNode(slovo.lower())
 
 class Trie:
     def __init__(self):
