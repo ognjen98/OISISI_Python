@@ -84,7 +84,7 @@ if __name__ == '__main__':
         elif option == 2:
             while True:
                 try:
-                    n = int(input("Unesite kol  iko rezultata po strani zelite da prikazete: "))
+                    n = int(input("Unesite koliko rezultata po strani zelite da prikazete: "))
                     break
                 except:
                     print("*****NEISPRAVAN UNOS*****")

@@ -107,14 +107,13 @@ def ranking(document, dict1):
     if document is None or dict1 is None:
         return 0
     result = 0
-    vertex = graph.get_vertex(document)
-    edges = graph.incident_edges(vertex, False)
-    links_number = len(edges)
+    #vertex = graph.get_vertex(document)
+    edges = graph.incident_edges(Vertex(document), False)
+    links_number = len(edges) #stepen
     if document not in dict1.keys():
         words_number = 0
     else:
         words_number = dict1[document]
-    words = words_number * 0.2
     words_in_links = 0
     for edge in edges:
         doc = str(edge.origin)
@@ -124,6 +123,7 @@ def ranking(document, dict1):
 
     links = links_number * 0.8
     link_words = words_in_links * 1.2
+    words = words_number * 0.2
     result = words + link_words + links
     return result
 
