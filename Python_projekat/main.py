@@ -26,7 +26,7 @@ if __name__ == '__main__':
     broj_strana = 0
     vreme_pretrage = 0
     broj_rezultata_pretrage = 0
-    print("Vreme ucitavanja: " + str(time.time() - start_time))
+    print("Vreme ucitavanja: " + str(round(time.time() - start_time, 2)) + " sekundi")
     
     while True:
         try:
@@ -70,7 +70,7 @@ if __name__ == '__main__':
                     broj_rezultata_pretrage) + ") za prikaz ili ste uneli negativan broj, unesite ponovo n: "))
                 except:
                     continue
-            print("Vreme pretrage: " + str(vreme_pretrage))
+            print("Vreme pretrage: " + str(round(vreme_pretrage, 2)) + " sekundi")
 
             end = 1
             if len(list) % n == 0:
