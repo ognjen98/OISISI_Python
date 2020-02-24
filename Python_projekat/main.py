@@ -34,14 +34,12 @@ if __name__ == '__main__':
             end = 0
             n = 0
             broj_strana = 0
-            upit1 = str(input("Unesite upit1: "))
-            upit2 = str(input("Unesite upit1: "))
+            upit1 = str(input("Unesite upit: "))
             # Ovde ide kod za parsiranje pozivanje odgovarajuce funkcije za pretragu
             # Proba:
             start_time = time.time()
             list = []
             list.append(upit1)
-            list.append(upit2)
             skup, dict1, i = traziSaOr(list)
             list = rangiraj(skup, dict1)
             merge_sort(list)
@@ -52,10 +50,20 @@ if __name__ == '__main__':
 
             print("***BROJ REZULTATA PRETRAGE: " + str(broj_rezultata_pretrage))
             vreme_pretrage = time.time() - start_time
-            n = int(input("Unesite koliko rezultata po strani zelite da prikazete: "))
+            while True:
+                try:
+                    n = int(input("Unesite kol  iko rezultata po strani zelite da prikazete: "))
+                    break
+                except:
+                    print("*****NEISPRAVAN UNOS*****")
+                    continue
+
             while n > len(list) or n <= 0:
-                n = int(input("Nema toliko rezultata (ima ih " + str(
+                try:
+                    n = int(input("Nema toliko rezultata (ima ih " + str(
                     broj_rezultata_pretrage) + ") za prikaz ili ste uneli negativan broj, unesite ponovo n: "))
+                except:
+                    continue
             print("Vreme pretrage: " + str(vreme_pretrage))
 
             end = 1
@@ -68,11 +76,20 @@ if __name__ == '__main__':
             print("-" * 140)
 
         elif option == 2:
-            n = int(input("Unesite koliko rezultata po strani zelite da prikazete: "))
+            while True:
+                try:
+                    n = int(input("Unesite kol  iko rezultata po strani zelite da prikazete: "))
+                    break
+                except:
+                    print("*****NEISPRAVAN UNOS*****")
+                    continue
             while n > len(list) or n <= 0:
                 print("Za odustanak pritisnite 0")
-                n = int(input("Nema toliko rezultata (ima ih " + str(
+                try:
+                    n = int(input("Nema toliko rezultata (ima ih " + str(
                     broj_rezultata_pretrage) + ") za prikaz ili ste uneli negativan broj, unesite ponovo n: "))
+                except:
+                    continue
                 if n == 0:
                     break
             if n == 0:
