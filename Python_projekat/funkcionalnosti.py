@@ -28,15 +28,20 @@ def traziSaOr(reci):
     return skup, lista
 
 
-def traziSaNot(rec):
-    try:
-        skup2, dict = trie.pronadjiRec(rec)
-    except AttributeError:
-        print("Nije pronadjen nijedan rezultat")
-        return
-    fajlovi = skup - skup2
+def traziSaNot(rec1,rec2):
+    lista = []
+    skup1, dict1 = trie.pronadjiRec(rec1)
+    skup2, dict2 = trie.pronadjiRec(rec2)
+    fajlovi = Set()
 
-    return fajlovi
+    if skup1 is not None and skup2 is not None:
+        fajlovi = skup1 - skup2
+    elif skup1 is not None and skup2 is None:
+        fajlovi = skup1
+
+    lista.append(dict1)
+
+    return fajlovi,lista
 
 
 def traziSaAnd(rec1, rec2):
@@ -59,17 +64,20 @@ def parsiranje(tekst):
 
     if len(reci) == 3 and reci[1].lower() == "or":
         lista = []
-        lista.append(reci[0])
-        lista.append(reci[2])
+        lista.append(reci[0].strip())
+        lista.append(reci[2].strip())
         skup, listaRecnika = traziSaOr(lista)
         return skup, listaRecnika
     elif len(reci) == 3 and reci[1].lower() == "and":
-        skup,listaRecnika = traziSaAnd(reci[0],reci[2])
+        skup,listaRecnika = traziSaAnd(reci[0].strip(),reci[2].strip())
+        return skup,listaRecnika
+    elif len(reci) == 3 and reci[1].lower() == "not":
+        skup,listaRecnika = traziSaNot(reci[0].strip(),reci[2].strip())
         return skup,listaRecnika
     else:
         lista = []
         for rec in reci:
-            lista.append(rec)
+            lista.append(rec.strip())
         skup,listaRecnika = traziSaOr(lista)
         return skup,listaRecnika
 
