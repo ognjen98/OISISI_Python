@@ -64,20 +64,20 @@ def parsiranje(tekst):
 
     if len(reci) == 3 and reci[1].lower() == "or":
         lista = []
-        lista.append(reci[0].strip())
-        lista.append(reci[2].strip())
+        lista.append(reci[0].lower().strip())
+        lista.append(reci[2].lower().strip())
         skup, listaRecnika = traziSaOr(lista)
         return skup, listaRecnika
     elif len(reci) == 3 and reci[1].lower() == "and":
-        skup,listaRecnika = traziSaAnd(reci[0].strip(),reci[2].strip())
+        skup,listaRecnika = traziSaAnd(reci[0].lower().strip(),reci[2].lower().strip())
         return skup,listaRecnika
     elif len(reci) == 3 and reci[1].lower() == "not":
-        skup,listaRecnika = traziSaNot(reci[0].strip(),reci[2].strip())
+        skup,listaRecnika = traziSaNot(reci[0].lower().strip(),reci[2].lower().strip())
         return skup,listaRecnika
     else:
         lista = []
         for rec in reci:
-            lista.append(rec.strip())
+            lista.append(rec.lower().strip())
         skup,listaRecnika = traziSaOr(lista)
         return skup,listaRecnika
 
@@ -96,7 +96,7 @@ def load(directory):
                 reci = list[1]
 
                 for rec in reci:
-                    trie.dodajRec(rec,os.path.join(directory,file))
+                    trie.dodajRec(rec.lower(),os.path.join(directory,file))
                 cvor1 = graph.insert_vertex(os.path.join(directory, file))
                 for link in links:
                     cvor2 = graph.insert_vertex(link)
