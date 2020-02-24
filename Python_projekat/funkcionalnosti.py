@@ -108,14 +108,14 @@ def ranking(document, dict1):
         return 0
     result = 0
     vertex = graph.get_vertex(document)
-    links_number = graph.degree(vertex, False)
+    edges = graph.incident_edges(vertex, False)
+    links_number = len(edges)
     if document not in dict1.keys():
         words_number = 0
     else:
         words_number = dict1[document]
     words = words_number * 0.2
     words_in_links = 0
-    edges = graph.incident_edges(vertex, False)
     for edge in edges:
         doc = str(edge.origin)
         if doc in dict1.keys():
