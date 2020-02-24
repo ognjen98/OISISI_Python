@@ -46,9 +46,7 @@ if __name__ == '__main__':
             # Ovde ide kod za parsiranje pozivanje odgovarajuce funkcije za pretragu
             # Proba:
             start_time = time.time()
-            list = []
-            list.append(upit1)
-            skup, dict1, i = traziSaOr(list)
+            skup, dict1 = parsiranje(upit1)
             list = rangiraj(skup, dict1)
             merge_sort(list)
             broj_rezultata_pretrage = len(list)
