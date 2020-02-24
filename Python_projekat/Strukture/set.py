@@ -66,7 +66,7 @@ class Set:
             raise
 
     def is_empty(self):
-        return True if len(self.data) == 0 else  False
+        return True if len(self.data) == 0 else False
 
     def remove(self, item):
         try:
