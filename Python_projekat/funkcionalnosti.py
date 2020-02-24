@@ -116,3 +116,11 @@ def prikaz(list):
     print(string)
     for value in list:
         print(value[0] + " " * (len(string) - len(value[0]) - 4) + str(round(value[1], 2)))
+
+def paginacija(list, start, end, n):
+    string = string = " " *15 + "PUTANJE DO DOKUMENATA" + " " * 100 + "RANG"
+    print(string)
+    for i in range(start*n, end*n):
+        if i > len(list) - 1:
+            return
+        print(" " *15 + str(list[i][0]) + " " * (len(string) - len(list[i][0]) - 19) + str(round(list[i][1], 2)))
