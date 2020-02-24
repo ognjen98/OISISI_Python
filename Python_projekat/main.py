@@ -2,7 +2,15 @@ from funkcionalnosti import *
 from sort import *
 
 if __name__ == '__main__':
-    directory = str(input("Unesite korenski direktorijum: "))
+    while True:
+        directory = str(input("Unesite korenski direktorijum: "))
+        if os.path.isdir(directory):
+            break
+        else:
+            print("Putanja koju ste uneli nije direktorijum.Probajte ponovo\n")
+            continue
+
+
     start_time = time.time()
     load(directory)
     print("1 -> Pretraga")
