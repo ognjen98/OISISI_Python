@@ -60,7 +60,7 @@ if __name__ == '__main__':
             vreme_pretrage = time.time() - start_time
             while True:
                 try:
-                    n = int(input("Unesite kol  iko rezultata po strani zelite da prikazete: "))
+                    n = int(input("Unesite koliko rezultata po strani zelite da prikazete: "))
                     break
                 except:
                     print("*****NEISPRAVAN UNOS*****")

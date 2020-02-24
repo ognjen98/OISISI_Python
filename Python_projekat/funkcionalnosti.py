@@ -66,9 +66,10 @@ def load(directory):
                 skup.add(os.path.join(directory, file))
                 list = parser.parse(os.path.join(directory, file))
                 links = list[0]
-                words = list[1]
-                for word in words:
-                    trie.dodajRec(word, os.path.join(directory, file))
+                reci = list[1]
+
+                for rec in reci:
+                    trie.dodajRec(rec,os.path.join(directory,file))
                 cvor1 = graph.insert_vertex(os.path.join(directory, file))
                 for link in links:
                     cvor2 = graph.insert_vertex(link)
