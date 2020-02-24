@@ -1,40 +1,118 @@
 from funkcionalnosti import *
 from sort import *
+
 if __name__ == '__main__':
     directory = str(input("Unesite korenski direktorijum: "))
     start_time = time.time()
     load(directory)
+    print("1 -> Pretraga")
+    print("2 -> Promenite broj rezultata po strani")
+    print("6 -> Naredna strana")
+    print("4 -> Prethodna strana")
+    print("5 -> Ponovni prikaz opcija")
+    print("0 -> Izlazak iz programa")
+    print("-" * 140)
+    start = 0
+    end = 0
+    n = 0
+    broj_strana = 0
+    vreme_pretrage = 0
+    broj_rezultata_pretrage = 0
     print("Vreme ucitavanja: " + str(time.time() - start_time))
-
+    
     while True:
-        print("1 -> Pretraga")
-        print("2")
-        print("0 -> Izlazak iz programa")
         try:
-            option = int(input("IZABERITE OPCIJU"))
-            if option not in (0, 1):
+            option = int(input("IZABERITE OPCIJU (za prikaz opcija pritisnite 5): "))
+            if option not in (0, 1, 2, 4, 5, 6):
                 raise Exception
         except:
-            print("Nevalidna opcija")
+            print("*****NEISPRAVNA OPCIJA*****")
             continue
 
         if option == 1:
-            upit = str(input("Unesite upit"))
-            #Ovde ide kod za parsiranje pozivanje odgovarajuce funkcije za pretragu
-            #Proga:
+            start = 0
+            end = 0
+            n = 0
+            broj_strana = 0
+            upit1 = str(input("Unesite upit1: "))
+            upit2 = str(input("Unesite upit1: "))
+            # Ovde ide kod za parsiranje pozivanje odgovarajuce funkcije za pretragu
+            # Proba:
             start_time = time.time()
             list = []
-            list.append(upit)
+            list.append(upit1)
+            list.append(upit2)
             skup, dict1, i = traziSaOr(list)
-            if i == 0:
-                print("Nema rezultata pretrage")
-            print("Vreme pretrage: " + str(time.time() - start_time))
             list = rangiraj(skup, dict1)
             merge_sort(list)
-            print("Broj rezultata pretrage: " + str(len(list)))
+            broj_rezultata_pretrage = len(list)
+            if skup.is_empty():
+                print(" " * 15 + "*****NEMA REZULTATA PRETRAGE*****")
+                continue
 
-            prikaz(list)
+            print("***BROJ REZULTATA PRETRAGE: " + str(broj_rezultata_pretrage))
+            vreme_pretrage = time.time() - start_time
+            n = int(input("Unesite koliko rezultata po strani zelite da prikazete: "))
+            while n > len(list) or n <= 0:
+                n = int(input("Nema toliko rezultata (ima ih " + str(
+                    broj_rezultata_pretrage) + ") za prikaz ili ste uneli negativan broj, unesite ponovo n: "))
+            print("Vreme pretrage: " + str(vreme_pretrage))
 
+            end = 1
+            if len(list) % n == 0:
+                broj_strana = len(list) / n
+            else:
+                broj_strana = len(list) // n + 1
+            paginacija(list, start, end, n)
+            print(" " * 15 + "STRANA " + str(start + 1) + " OD " + str(int(broj_strana)))
+            print("-" * 140)
 
+        elif option == 2:
+            n = int(input("Unesite koliko rezultata po strani zelite da prikazete: "))
+            while n > len(list) or n <= 0:
+                print("Za odustanak pritisnite 0")
+                n = int(input("Nema toliko rezultata (ima ih " + str(
+                    broj_rezultata_pretrage) + ") za prikaz ili ste uneli negativan broj, unesite ponovo n: "))
+                if n == 0:
+                    break
+            if n == 0:
+                continue
+
+            start = 0
+            end = 1
+            paginacija(list, start, end, n)
+            if len(list) % n == 0:
+                broj_strana = len(list) / n
+            else:
+                broj_strana = len(list) // n + 1
+            print(" " * 15 + "STRANA " + str(start + 1) + " OD " + str(int(broj_strana)))
+            print("-" * 140)
+        elif option == 6:
+            if start >= broj_strana - 1:
+                print("NA POSLEDNJOJ STE STRANI")
+                continue
+            start += 1
+            end += 1
+            paginacija(list, start, end, n)
+            print(" " * 15 + "STRANA " + str(start + 1) + " OD " + str(int(broj_strana)))
+            print("-" * 140)
+
+        elif option == 4:
+            if start <= 0:
+                print("NA PRVOJ STE STRANI")
+                continue
+            start -= 1
+            end -= 1
+            paginacija(list, start, end, n)
+            print(" " * 15 + "STRANA " + str(start + 1) + " OD " + str(int(broj_strana)))
+            print("-" * 140)
+        elif option == 5:
+            print("1 -> Pretraga")
+            print("2 -> Promenite broj rezultata po strani")
+            print("6 -> Naredna strana")
+            print("4 -> Prethodna strana")
+            print("5 -> Ponovni prikaz opcija")
+            print("0 -> Izlazak iz programa")
+            continue
         elif option == 0:
             break
