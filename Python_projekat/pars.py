@@ -69,7 +69,7 @@ class Parser(HTMLParser):
         self.words = []
 
         try:
-            with open(path, encoding="utf-8") as document:
+            with open(path, 'r') as document:
                 self.path_root = os.path.abspath(os.path.dirname(path))
                 content = document.read()
                 self.feed(content)

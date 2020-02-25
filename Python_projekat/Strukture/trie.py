@@ -29,6 +29,7 @@ class Trie:
         """
         cvor = self.koren
         recPostoji = True
+        i = 0
 
         for i in range(len(rec)):
             if rec[i] in cvor.deca:
@@ -36,6 +37,7 @@ class Trie:
             else:
                 recPostoji = False
                 break
+
 
         if not recPostoji:
             while i < len(rec):
@@ -48,11 +50,7 @@ class Trie:
             cvor.skupFajlova.add(fajl)
         else:
             cvor.fajlovi[fajl] += 1
-
-
-
-
-
+            
 
     def pronadjiRec(self, rec):
         """
