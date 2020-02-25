@@ -50,7 +50,7 @@ class Trie:
             cvor.skupFajlova.add(fajl)
         else:
             cvor.fajlovi[fajl] += 1
-            
+
 
     def pronadjiRec(self, rec):
         """
