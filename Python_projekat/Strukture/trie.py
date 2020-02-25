@@ -45,13 +45,13 @@ class Trie:
 
         if fajl not in cvor.fajlovi:
             cvor.fajlovi[fajl] = 1
+            cvor.skupFajlova.add(fajl)
         else:
             cvor.fajlovi[fajl] += 1
 
 
-        for f in cvor.fajlovi:
-            if f not in cvor.skupFajlova:
-                cvor.skupFajlova.add(f)
+
+
 
 
     def pronadjiRec(self, rec):
