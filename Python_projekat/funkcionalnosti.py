@@ -107,17 +107,16 @@ def ranking(document, dict1):
     if document is None or dict1 is None:
         return 0
     result = 0
-    #vertex = graph.get_vertex(document)
     edges = graph.incident_edges(Vertex(document), False)
     links_number = len(edges) #stepen
-    if document not in dict1.keys():
+    if document not in dict1:
         words_number = 0
     else:
         words_number = dict1[document]
     words_in_links = 0
     for edge in edges:
         doc = str(edge.origin)
-        if doc in dict1.keys():
+        if doc in dict1:
             words_in_links += dict1[doc]
             links_number = links_number - 1
 
@@ -152,3 +151,4 @@ def paginacija(list, start, end, n):
         if i > len(list) - 1:
             return
         print(" " *15 + str(list[i][0]) + " " * (len(string) - len(list[i][0]) - 19) + str(round(list[i][1], 2)))
+
